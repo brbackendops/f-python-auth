@@ -47,8 +47,8 @@ jobs:
         run: python manage.py makemigrations
       
       - name: load into db
-        # : if make_migrations.outcome == 'success'
-        run: ''
+        if: success() && steps.make_migrations.outcome == 'success'
+        run: python manage.py migrate
 
   test:
     name: Test
