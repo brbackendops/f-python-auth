@@ -41,12 +41,12 @@ jobs:
           python-version: 3.12.2
       - name: install dependencies
         run: pip install -r requirements.txt
-      - name: make migrations
-        id: make_migrations
-        run: python manage.py makemigrations
-      - name: load into db
-        if: success() && steps.make_migrations.outcome == 'success'
-        run: python manage.py migrate
+      # - name: make migrations
+      #   id: make_migrations
+      #   run: python manage.py makemigrations
+      # - name: load into db
+      #   if: success() && steps.make_migrations.outcome == 'success'
+      #   run: python manage.py migrate
       - name: run & check
         run: python manage.py check
   test:
