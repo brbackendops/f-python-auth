@@ -16,6 +16,8 @@ jobs:
     env:
       DB_NAME: falcondb
       DB_HOST: postgres
+      DB_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      DB_USERNAME: ${{ vars.POSTGRES_USERNAME }}
       DB_PORT: 5432
     services:
       postgres:
