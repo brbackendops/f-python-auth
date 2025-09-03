@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # dependencies
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_yasg',
     
     # apps
     'apps.users',
