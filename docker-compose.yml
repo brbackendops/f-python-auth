@@ -8,8 +8,21 @@ services:
       - '8000:8000'
     env_file:
       - docker.env
+    networks:
+      - falcon-net    
     depends_on:
       - db
+      - redis
+
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+    restart: 'on-failure'
+    networks:
+      - falcon-net
+    volumes:
+      - redis_data:/usr/local/etc/redis
 
   db:
     image: postgres
@@ -18,8 +31,14 @@ services:
     environment:
       - POSTGRES_USERNAME=user1
       - POSTGRES_PASSWORD=user_password
+    networks:
+      - falcon-net      
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
+  redis_data:
+
+networks:
+  falcon-net:

@@ -32,6 +32,7 @@ else:
     DEBUG = True
 
 ALLOWED_HOSTS = []
+# TESTING=True
 
 
 # Application definition
@@ -105,6 +106,21 @@ else:
             'CONN_HEALTH_CHECKS':  True
         }
     }
+
+
+# if 'test' not in sys.argv:
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"redis://{config('REDIS_CLIENT')}:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "IGNORE_EXCEPTIONS": True
+        }
+    }
+}    
+
+DJANGO_REDIS_IGNORE_EXCEPTIONS = True
 
 
 # Password validation
