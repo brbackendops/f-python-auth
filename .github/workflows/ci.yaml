@@ -76,7 +76,7 @@ jobs:
           --health-retries 5
     runs-on: ubuntu-latest
     env:
-      REDIS_CLIENT: redis
+      REDIS_CLIENT: localhost
     needs:
       - build
     steps:
