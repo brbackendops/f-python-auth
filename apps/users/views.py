@@ -13,6 +13,11 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializer import JwtTokenObtainSerializer , UserSerializer
 from .utils.error import ModelAlreadyExists
 
+# rate limiter
+from .utils.limiter import FixedRateLimiter
+
+rate_limiter = FixedRateLimiter()
+
 class UserRegisterView(generics.CreateAPIView):
     serializer_class = UserSerializer
     User = get_user_model()
@@ -23,6 +28,7 @@ class UserRegisterView(generics.CreateAPIView):
         
         serializer.save()
     
+    @rate_limiter
     def post(self,request,*args,**kwargs):
         try:
             body = request.data
